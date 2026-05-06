@@ -91,6 +91,7 @@ export const logoutUser = async (req, res) => {
         res.status(200).json({ message: "Logout successful" })
     } catch (error) {
         console.log(error)
+        
         return res.status(400).json({ status: false, message: error.message })
     }
 }
