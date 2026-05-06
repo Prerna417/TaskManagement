@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5000;
 // middlewares
 app.use(
   cors({
-    origin: ["https://frontend-production-6619.up.railway.app/","http://localhost:3000", "http://localhost:3001"],
+    origin: ["https://frontend-production-6619.up.railway.app","http://localhost:3000", "http://localhost:3001"],
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })
