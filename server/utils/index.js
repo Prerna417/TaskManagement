@@ -3,7 +3,7 @@ import mongoose from "mongoose"
 
 export const dbConnection = async () => {
     try {
-        console.log("MONGO URI:", process.env.MONGODB_URI);
+  
         await mongoose.connect(process.env.MONGODB_URI)
 
         console.log("DB connection established")
