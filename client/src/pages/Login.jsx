@@ -109,11 +109,20 @@ const Login = () => {
                             {isLoading ? (
                                 <Loading />
                             ) : (
+                                <>
                                 <Button
                                     type="submit"
                                     label="Submit"
                                     className="w-full h-10 bg-blue-700 text-white rounded-full"
                                 />
+                                 <p
+                                        onClick={() => navigate("/sign-up")}
+                                        className="text-sm text-blue-600 hover:underline cursor-pointer text-center"
+                                    >
+                                        Don't have an account? SignUp
+                                    </p>
+                                </>
+                                
                             )}
                         </div>
                     </form>

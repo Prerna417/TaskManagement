@@ -19,11 +19,6 @@ const linkData = [
         icon: <MdDashboard />,
     },
     {
-        label: "Team",
-        link: "team",
-        icon: <FaUsers />,
-    },
-    {
         label: "Tasks",
         link: "tasks",
         icon: <FaTasks />,
@@ -42,6 +37,11 @@ const linkData = [
         label: "To Do",
         link: "todo/todo",
         icon: <MdOutlinePendingActions />,
+    },
+    {
+        label: "Team",
+        link: "team",
+        icon: <FaUsers />,
     },
     {
         label: "Trash",

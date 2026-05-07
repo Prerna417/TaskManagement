@@ -3,16 +3,27 @@ import clsx from "clsx"
 import { Fragment, useRef } from "react"
 import { IoClose } from "react-icons/io5"
 import { useDispatch, useSelector } from "react-redux"
-import { Navigate, Outlet, Route, Routes, useLocation } from "react-router-dom"
+import {
+    Navigate,
+    Outlet,
+    Route,
+    Routes,
+    useLocation,
+} from "react-router-dom"
 import { Toaster } from "sonner"
+
 import Navbar from "./components/Navbar"
 import Sidebar from "./components/Sidebar"
+
 import Login from "./pages/Login"
+import Signup from "./pages/Signup"
+
 import TaskDetails from "./pages/TaskDetails"
 import Tasks from "./pages/Tasks"
 import Trash from "./pages/Trash"
 import Users from "./pages/Users"
 import Dashboard from "./pages/Dashboard"
+
 import { setOpenSidebar } from "./redux/slices/authSlice"
 
 function Layout() {
@@ -22,12 +33,15 @@ function Layout() {
 
     return user ? (
         <div className="w-full h-screen flex flex-col md:flex-row">
+            {/* Desktop Sidebar */}
             <div className="w-1/5 h-screen bg-white sticky top-0 hidden md:block">
                 <Sidebar />
             </div>
 
+            {/* Mobile Sidebar */}
             <MobileSidebar />
 
+            {/* Main Content */}
             <div className="flex-1 overflow-y-auto">
                 <Navbar />
 
@@ -43,7 +57,9 @@ function Layout() {
 
 const MobileSidebar = () => {
     const { isSidebarOpen } = useSelector((state) => state.auth)
+
     const mobileMenuRef = useRef(null)
+
     const dispatch = useDispatch()
 
     const closeSidebar = () => {
@@ -66,8 +82,10 @@ const MobileSidebar = () => {
                     <div
                         ref={(node) => (mobileMenuRef.current = node)}
                         className={clsx(
-                            "md:hidden w-full h-full bg-black/40 transition-all duration-700 transform ",
-                            isSidebarOpen ? "translate-x-0" : "translate-x-full"
+                            "md:hidden w-full h-full bg-black/40 transition-all duration-700 transform",
+                            isSidebarOpen
+                                ? "translate-x-0"
+                                : "translate-x-full"
                         )}
                         onClick={() => closeSidebar()}
                     >
@@ -94,25 +112,39 @@ const MobileSidebar = () => {
 
 function App() {
     return (
-        <main className="w-full min-h-screen bg-[#f3f4f6] ">
+        <main className="w-full min-h-screen bg-[#f3f4f6]">
             <Routes>
+
+                {/* Protected Routes */}
                 <Route element={<Layout />}>
                     <Route
                         index
                         path="/"
                         element={<Navigate to="/dashboard" />}
                     />
+
                     <Route path="/dashboard" element={<Dashboard />} />
+
                     <Route path="/tasks" element={<Tasks />} />
+
                     <Route path="/completed/:status" element={<Tasks />} />
+
                     <Route path="/in-progress/:status" element={<Tasks />} />
+
                     <Route path="/todo/:status" element={<Tasks />} />
+
                     <Route path="/team" element={<Users />} />
+
                     <Route path="/trashed" element={<Trash />} />
+
                     <Route path="/task/:id" element={<TaskDetails />} />
                 </Route>
 
+                {/* Public Routes */}
+                <Route path="/sign-up" element={<Signup />} />
+
                 <Route path="/log-in" element={<Login />} />
+
             </Routes>
 
             <Toaster richColors />
